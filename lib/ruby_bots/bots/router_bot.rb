@@ -3,9 +3,7 @@ module RubyBots
     DEFAULT_DESCRIPTION = "This bot will route the user's input to the appropriate tool. It will only select and use one tool."
     
     def initialize(name: "Router bot", description: DEFAULT_DESCRIPTION, tools:)
-      @name = name
-      @description = description
-      @tools = tools
+      super(name: name, description: description, tools: tools)
     end
 
     def system_instructions

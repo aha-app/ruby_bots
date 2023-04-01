@@ -5,9 +5,8 @@ module RubyBots
     DEFAULT_DESCRIPTION = "This bot will use OpenAI to determine the appropriate tool."
     
     def initialize(name: "OpenAI bot", description: DEFAULT_DESCRIPTION, tools:)
-      @name = name
-      @description = description
       @tools = tools
+      super(name: name, description: description)
     end
     
     def run(inputs)

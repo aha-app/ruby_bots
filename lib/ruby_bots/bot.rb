@@ -2,9 +2,9 @@ module RubyBots
   class Bot < Tool
     attr_accessor :tools
 
-    def initialize(tools:, **kwargs)
+    def initialize(name:, description:, tools:)
       @tools = tools
-      super(**kwargs)
+      super(name: name, description: description)
     end
 
     def run(inputs)
