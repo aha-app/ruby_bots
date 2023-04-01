@@ -7,7 +7,7 @@ module RubyBots
       super(**kwargs)
     end
 
-    def operate(inputs)
+    def run(inputs)
       raise NotImplementedError
     end
   end

@@ -19,7 +19,7 @@ module RubyBots
       PROMPT
     end
       
-    def operate(inputs)
+    def run(inputs)
       params = {
         messages: [
           { role: :system, content: system_instructions },
@@ -32,7 +32,7 @@ module RubyBots
       response_text = response.dig("choices", 0, "message", "content")
       selected_tool = tools.find{|t| t.name == response_text}
       if selected_tool
-        selected_tool.operate(inputs)
+        selected_tool.response(inputs)
       else
         response_text
       end
