@@ -23,21 +23,39 @@ module RubyBots
     end
 
     def response(input)
+      @@input_validators ||= []
       @@input_validators.each do |validator|
-        validator.call(input)
+        send(validator, input)
       end
       
-      output = run(input)
+      if @errors.empty?
+        output = run(input)
+      else
+        raise RubyBots::Errors::InvalidInputError.new(errors: @errors)
+      end
       
+      @@output_validators ||= []
       @@output_validators.each do |validator|
-        validator.call(output)
+        send(validator, output)
       end
+
+      if @errors.any?
+        raise RubyBots::Errors::InvalidOutputError.new(errors: @errors)
+      end
+
+      output
     end
     
     private 
 
     def run(inputs)
       raise NotImplementedError
+    end
+
+    def is_json(param)
+      JSON.parse(param)
+    rescue JSON::ParserError
+      errors << "invalid JSON"
     end
   end
 end

@@ -2,8 +2,6 @@ require 'openai'
 
 module RubyBots
   class OpenAITool < Tool
-    validate_inputs :input_is_json
-
     DEFAULT_DESCRIPTION = "This tool will use open ai to determine the output."
   
     def initialize(name: "OpenAI Tool", description: DEFAULT_DESCRIPTION)
@@ -38,12 +36,6 @@ module RubyBots
       response = client.chat(parameters: params)
       
       response.dig("choices", 0, "message", "content")
-    end
-
-    def input_is_json(input)
-      JSON.parse(input)
-    rescue JSON::ParserError
-      errors.add(:input, "must be valid JSON")
     end
   end
 end
