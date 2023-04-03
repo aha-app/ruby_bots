@@ -13,34 +13,34 @@ module RubyBots
     end
 
     def self.validate_inputs(method)
-      @@input_validators ||= []
-      @@input_validators << method
+      @input_validators ||= []
+      @input_validators << method
     end
 
     def self.validate_outputs(method)
-      @@output_validators ||= []
-      @@output_validators << method
+      @output_validators ||= []
+      @output_validators << method
     end
 
     def response(input)
-      @@input_validators ||= []
-      @@input_validators.each do |validator|
+      self.class.input_validators ||= []
+      self.class.input_validators.each do |validator|
         send(validator, input)
       end
       
       if @errors.empty?
         output = run(input)
       else
-        raise RubyBots::Errors::InvalidInputError.new(errors: @errors)
+        raise RubyBots::InvalidInputError.new(errors: @errors)
       end
       
-      @@output_validators ||= []
-      @@output_validators.each do |validator|
+      self.class.output_validators ||= []
+      self.class.output_validators.each do |validator|
         send(validator, output)
       end
 
       if @errors.any?
-        raise RubyBots::Errors::InvalidOutputError.new(errors: @errors)
+        raise RubyBots::InvalidOutputError.new(errors: @errors)
       end
 
       output
