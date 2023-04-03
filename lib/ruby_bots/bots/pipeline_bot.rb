@@ -5,6 +5,8 @@ module RubyBots
     def initialize(name: "Pipeline bot", description: DEFAULT_DESCRIPTION, tools:)
       super(name: name, description: description, tools: tools)
     end
+
+    private
       
     def run(inputs)
       tools.each do |tool|

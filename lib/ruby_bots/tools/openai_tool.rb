@@ -24,6 +24,8 @@ module RubyBots
     def system_instructions
       "You are a helpful assistant."
     end
+
+    private
     
     def run(inputs)
       params = {

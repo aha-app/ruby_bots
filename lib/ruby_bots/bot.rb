@@ -7,6 +7,8 @@ module RubyBots
       super(name: name, description: description)
     end
 
+    private
+
     def run(inputs)
       raise NotImplementedError
     end

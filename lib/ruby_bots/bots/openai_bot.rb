@@ -8,6 +8,8 @@ module RubyBots
       @tools = tools
       super(name: name, description: description)
     end
+
+    private
     
     def run(inputs)
       params = {

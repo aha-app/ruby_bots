@@ -6,34 +6,38 @@ module RubyBots
       @name = name
       @description = description
       @errors = []
-      @input_validators ||= []
-      @output_validators ||= []
+    end
+
+    class << self
+      attr_accessor :input_validators, :output_validators
     end
 
     def self.validate_inputs(method)
-      @input_validators ||= []
-      @input_validators << method
+      @@input_validators ||= []
+      @@input_validators << method
     end
 
     def self.validate_outputs(method)
-      @output_validators ||= []
-      @output_validators << method
-    end
-
-    def run(inputs)
-      raise NotImplementedError
+      @@output_validators ||= []
+      @@output_validators << method
     end
 
     def response(input)
-      @input_validators.each do |validator|
+      @@input_validators.each do |validator|
         validator.call(input)
       end
       
       output = run(input)
-
-      @output_validators.each do |validator|
+      
+      @@output_validators.each do |validator|
         validator.call(output)
       end
+    end
+    
+    private 
+
+    def run(inputs)
+      raise NotImplementedError
     end
   end
 end

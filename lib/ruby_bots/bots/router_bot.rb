@@ -16,6 +16,8 @@ module RubyBots
       If no tools match the user's request respond with "I'm sorry, I am still learning." and nothing more.
       PROMPT
     end
+
+    private
       
     def run(inputs)
       params = {
