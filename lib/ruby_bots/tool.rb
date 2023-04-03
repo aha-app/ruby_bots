@@ -56,6 +56,8 @@ module RubyBots
       JSON.parse(param)
     rescue JSON::ParserError
       errors << "invalid JSON"
+    rescue TypeError
+      errors << "value is not a String"
     end
   end
 end
