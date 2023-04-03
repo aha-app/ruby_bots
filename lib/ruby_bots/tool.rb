@@ -12,12 +12,12 @@ module RubyBots
       attr_accessor :input_validators, :output_validators
     end
 
-    def self.validate_inputs(method)
+    def self.validate_input(method)
       @input_validators ||= []
       @input_validators << method
     end
 
-    def self.validate_outputs(method)
+    def self.validate_output(method)
       @output_validators ||= []
       @output_validators << method
     end

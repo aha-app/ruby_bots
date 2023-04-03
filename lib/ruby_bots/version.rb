@@ -1,3 +1,3 @@
 module RubyBots
-  VERSION = "0.0.18".freeze
+  VERSION = "0.0.20".freeze
 end
