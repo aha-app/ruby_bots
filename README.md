@@ -4,7 +4,7 @@
 
 RubyBots allows you to build composable tools to manipulate values.
 
-The basic toold provide an OpenAI tool that can connect to OpenAI and provide feedback.
+The basic tools provide an OpenAI tool that can connect to OpenAI and provide feedback.
 
 ## Installation
 
