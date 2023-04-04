@@ -13,7 +13,7 @@ module RubyBots
       #{tools.map{|t| t.name + " - " + t.description}.join("\n")}
 
       Return only the name of the tool that best fits the user's request.
-      If no tools match the user's request respond with "I'm sorry, I am still learning." and nothing more.
+      If no tools match the user's request respond with "no tool" and nothing more.
       PROMPT
     end
 
