@@ -23,6 +23,17 @@ module RubyBots
       PROMPT
     end
 
+    def system_instructions
+      <<~PROMPT
+      You are an assistant designed to select a tool for a user to use. You are provided with the user's input.
+      Select from the following tools (name - description):
+      #{tools.map{|t| t.name + " - " + t.description}.join("\n")}
+
+      Return only the name of the tool that best fits the user's request.
+      If no tools match the user's request respond with "no tool" and nothing more.
+      PROMPT
+    end
+
     private
 
     def run(input)
