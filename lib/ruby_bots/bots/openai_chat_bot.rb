@@ -33,6 +33,8 @@ module RubyBots
         
         bot_output = response.dig("choices", 0, "message", "content")
 
+        @messages << { role: :assistant, content: bot_output }
+
         if tools.map(&:name).include?(bot_output)
           puts "Dispatch a tool bot...."
         end
