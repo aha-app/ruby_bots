@@ -6,11 +6,11 @@ module RubyBots
       super(name: name, description: description, tools: tools)
     end
 
-    def system_instructions
+    def ruby_system_instructions
       <<~'PROMPT'
       You are assisting a code review of ruby code changes. Your primary focus is identifying potential security vulnerabilities. 
 
-      You will be provided a git diff and you should flag any lines that contain a potential vulnerability. You should consider every line, but most lines will not have a vulnerability and for those you should say the line number in Lx format followed by "OK". Example for a line four where you have no concerns: "L4: OK". Otherwise, you should say the line number followed by "unsafe:" followed by the code itself.  
+      You will be provided a git diff and you should flag any lines that contain a potential vulnerability. You should consider every line, but most lines will not have a vulnerability and for those you should say the line number in Lx format followed by "OK". Example for a line four where you have no concerns: "L4 OK". Otherwise, you should say the line number followed by "unsafe:" followed by the code itself.  
 
       Here are some specific kinds of vulnerabilities preceded by "unsafe:" with a comment explaining the concern, with a safe "suggestion:" if applicable. Keep in mind that you are not limited to these specific examples when detecting vulnerabilities.
 
@@ -32,7 +32,30 @@ module RubyBots
       PROMPT
     end
 
-    def run(input)
+    def javascript_system_instructions
+      <<~'PROMPT'
+      You are assisting a code review of javascript code changes. Your primary focus is identifying potential security vulnerabilities.
+
+      You will be provided code and you should flag any lines that contain a vulnerability. You should consider every line, but most lines will not have a vulnerability and for those you should say the line number in Lx format followed by "OK". Example for a line four where you have no concerns: "L4 OK". Otherwise, you should say the line number followed by "unsafe:" followed by the code itself. 
+
+      Example:
+      L1 OK
+      L2 OK
+      L3 unsafe: document.getElementById("temp").innerHTML = user_input;
+      PROMPT
+    end
+
+    def review_code(input, filetype: "ruby")
+
+      system_instructions = case filetype
+      when "ruby"
+        ruby_system_instructions
+      when "javascript"
+        javascript_system_instructions
+      else 
+        raise "Unsupported filetype: #{filetype}"
+      end
+
       @messages = [
         { role: :system, content: system_instructions },
         { role: :user, content: input }
@@ -45,12 +68,17 @@ module RubyBots
 
         @messages << { role: :assistant, content: bot_output }
 
-        puts bot_output
+        puts "=>\n" + remove_ok_lines(bot_output) + "\n\n"
 
         input = gets.chomp
 
         @messages << { role: :user, content: input }
       end
+    end
+
+    OK_LINE_REGEX = /L\d+ OK\n/
+    def remove_ok_lines(bot_output)
+      bot_output.gsub(OK_LINE_REGEX, "") # remove OK lines
     end
 
     def params
