@@ -61,14 +61,15 @@ module RubyBots
         { role: :user, content: input }
       ]
       
-      while(input!="exit")      
+      while(input!="exit")
+        puts "\nprocessing..."      
         response = client.chat(parameters: params)
         
         bot_output = response.dig("choices", 0, "message", "content")
 
         @messages << { role: :assistant, content: bot_output }
 
-        puts "=>\n" + remove_ok_lines(bot_output) + "\n\n"
+        puts "RESPONSE =>\n" + remove_ok_lines(bot_output) + "\n\n"
 
         input = gets.chomp
 
@@ -76,7 +77,7 @@ module RubyBots
       end
     end
 
-    OK_LINE_REGEX = /L\d+ OK\n/
+    OK_LINE_REGEX = /L\d+ OK\n?/
     def remove_ok_lines(bot_output)
       bot_output.gsub(OK_LINE_REGEX, "") # remove OK lines
     end
