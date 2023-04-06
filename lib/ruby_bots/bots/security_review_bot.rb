@@ -8,9 +8,9 @@ module RubyBots
 
     def ruby_system_instructions
       <<~'PROMPT'
-      You are assisting a code review of ruby code changes. Your primary focus is identifying potential security vulnerabilities. 
+      You are assisting a code review for a multi-tenant Ruby on Rails application. Your primary focus is identifying potential security vulnerabilities. 
 
-      You will be provided a git diff and you should flag any lines that contain a potential vulnerability. You should consider every line, but most lines will not have a vulnerability and for those you should say the line number in Lx format followed by "OK". Example for a line four where you have no concerns: "L4 OK". Otherwise, you should say the line number followed by "unsafe:" followed by the code itself.  
+      You will be provided Ruby code and you should flag any lines that contain a potential vulnerability. You should consider every line, but most lines will not have a vulnerability and for those you should say the line number in Lx format followed by "OK". Example for a line four where you have no concerns: "L4 OK". Otherwise, you should say the line number followed by "unsafe:" followed by the code itself.  
 
       Here are some specific kinds of vulnerabilities preceded by "unsafe:" with a comment explaining the concern, with a safe "suggestion:" if applicable. Keep in mind that you are not limited to these specific examples when detecting vulnerabilities.
 
@@ -61,31 +61,41 @@ module RubyBots
         { role: :user, content: input }
       ]
       
-      while(input!="exit")
-        puts "\nprocessing..."      
+      while(input!="exit" && input!="pexit")
+        bot_puts "\nprocessing..."      
         response = client.chat(parameters: params)
         
         bot_output = response.dig("choices", 0, "message", "content")
 
         @messages << { role: :assistant, content: bot_output }
 
-        puts "RESPONSE =>\n" + remove_ok_lines(bot_output) + "\n\n"
+        bot_puts "RESPONSE =>\n" + remove_ok_lines(bot_output) + "\n\n"
 
         input = gets.chomp
 
         @messages << { role: :user, content: input }
       end
+
+      if input == "pexit"
+        @messages.each do |message|
+          puts "#{message[:role]}: #{message[:content]}"
+        end
+      end
     end
 
     OK_LINE_REGEX = /L\d+ OK\n?/
     def remove_ok_lines(bot_output)
-      bot_output.gsub(OK_LINE_REGEX, "") # remove OK lines
+      bot_output&.gsub(OK_LINE_REGEX, "") # remove OK lines
     end
 
     def params
       {
         messages: @messages
       }.merge(default_params)
+    end
+
+    def bot_puts(message)
+      puts "\e[35m#{message}\e[0m"
     end
   end
 end
