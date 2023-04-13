@@ -25,11 +25,11 @@ module RubyBots
 
     private
     
-    def run(inputs)
+    def run(input)
       params = {
         messages: [
           { role: :system, content: system_instructions },
-          { role: :user, content: inputs }
+          { role: :user, content: input }
         ]
       }.merge(default_params) 
   

@@ -19,11 +19,11 @@ module RubyBots
 
     private
       
-    def run(inputs)
+    def run(input)
       params = {
         messages: [
           { role: :system, content: system_instructions },
-          { role: :user, content: inputs }
+          { role: :user, content: input }
         ]
       }.merge(default_params) 
 
@@ -32,7 +32,7 @@ module RubyBots
       response_text = response.dig("choices", 0, "message", "content")
       selected_tool = tools.find{|t| t.name == response_text}
       if selected_tool
-        selected_tool.response(inputs)
+        selected_tool.response(input)
       else
         response_text
       end

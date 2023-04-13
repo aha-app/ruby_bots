@@ -13,6 +13,7 @@ module RubyBots
     attr_accessor :openai_api_key
     def initialize()
       @openai_api_key = ENV["OPENAI_ACCESS_TOKEN"]
+      @wolfram_app_id = ENV["WOLFRAM_APPID"]
     end
   end
 
@@ -35,3 +36,4 @@ require "ruby_bots/tools/openai_tool.rb"
 require "ruby_bots/bots/openai_bot.rb"
 require "ruby_bots/bots/pipeline_bot.rb"
 require "ruby_bots/bots/router_bot.rb"
+require "ruby_bots/bots/openai_react_bot.rb"

@@ -9,7 +9,7 @@ module RubyBots
 
     private
 
-    def run(inputs)
+    def run(input)
       raise NotImplementedError
     end
   end

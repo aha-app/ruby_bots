@@ -8,12 +8,12 @@ module RubyBots
 
     private
       
-    def run(inputs)
+    def run(input)
       tools.each do |tool|
-        inputs = tool.run(inputs)
+        input = tool.run(input)
       end
 
-      inputs
+      input
     end
   end
 end
