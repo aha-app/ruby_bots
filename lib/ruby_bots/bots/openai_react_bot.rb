@@ -10,8 +10,7 @@ module RubyBots
     ]
 
     def initialize(name: "OpenAI ReAct bot", description: DEFAULT_DESCRIPTION, tools: DEFAULT_TOOLS)
-      @tools = tools
-      super(name: name, description: description)
+      super(name: name, description: description, tools: tools)
     end
 
     def examples
