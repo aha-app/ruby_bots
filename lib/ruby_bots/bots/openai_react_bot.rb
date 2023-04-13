@@ -15,50 +15,51 @@ module RubyBots
     end
 
     def examples
-      [
-        <<~EXAMPLE
-        User: What is the current temperature in the city Julia Roberts was born in?
-        Thought: I need to know where Julia Roberts was born.
-        Action: search[Julia Roberts birthplace]
-        Observation: Smyrna, Georgia
-        Thought: I need to know the current temperature in Smyrna, Georgia.
-        Action: search[current temperature Smyrna, Georgia]
-        Observation: 72 degrees Fahrenheit
-        Thought: I need to tell the user the current temperature in the city Julia Roberts was born in.
-        Answer: 72 degrees Fahrenheit
-        EXAMPLE
-        ,
-        <<~EXAMPLE
-        User: What is the square of the age of Albert Einstein at his death?
-        Thought: I need to know the age of Albert Einstein at his death.
-        Action: search[Albert Einstein age at death]
-        Observation: 76 years old
-        Thought: I need to know the square of 76.
-        Action: calculate[76^2]
-        Observation: 5776
-        Thought: I need to tell the user the square of the age of Albert Einstein at his death.
-        Answer: 5776
-        EXAMPLE
-        ,
-        <<~EXAMPLE
-        User: What is half of the amount of years that have passed since the year the first airplane flew?
-        Thought: I need to know the year the first airplane flew.
-        Action: search[first airplane flight year]
-        Observation: 1903
-        Thought: I need to know the current year.
-        Action: search[current year]
-        Observation: 2023
-        Thought: I need to know the amount of years that have passed since 1903.
-        Action: calculate[2023 - 1903]
-        Observation: 120
-        Thought: I need to know half of 120.
-        Action: calculate[120 / 2]
-        Observation: 60
-        Thought: I need to tell the user half of the amount of years that have passed since the year the first airplane flew.
-        Answer: 60
-        EXAMPLE
-      ]
+      [ EXAMPLE_ONE, EXAMPLE_TWO, EXAMPLE_THREE ]
     end
+
+    
+    EXAMPLE_ONE = <<~EXAMPLE
+    User: What is the current temperature in the city Julia Roberts was born in?
+    Thought: I need to know where Julia Roberts was born.
+    Action: search[Julia Roberts birthplace]
+    Observation: Smyrna, Georgia
+    Thought: I need to know the current temperature in Smyrna, Georgia.
+    Action: search[current temperature Smyrna, Georgia]
+    Observation: 72 degrees Fahrenheit
+    Thought: I need to tell the user the current temperature in the city Julia Roberts was born in.
+    Answer: 72 degrees Fahrenheit
+    EXAMPLE
+  
+    EXAMPLE_TWO = <<~EXAMPLE
+    User: What is the square of the age of Albert Einstein at his death?
+    Thought: I need to know the age of Albert Einstein at his death.
+    Action: search[Albert Einstein age at death]
+    Observation: 76 years old
+    Thought: I need to know the square of 76.
+    Action: calculate[76^2]
+    Observation: 5776
+    Thought: I need to tell the user the square of the age of Albert Einstein at his death.
+    Answer: 5776
+    EXAMPLE
+  
+    EXAMPLE_THREE = <<~EXAMPLE
+    User: What is half of the amount of years that have passed since the year the first airplane flew?
+    Thought: I need to know the year the first airplane flew.
+    Action: search[first airplane flight year]
+    Observation: 1903
+    Thought: I need to know the current year.
+    Action: search[current year]
+    Observation: 2023
+    Thought: I need to know the amount of years that have passed since 1903.
+    Action: calculate[2023 - 1903]
+    Observation: 120
+    Thought: I need to know half of 120.
+    Action: calculate[120 / 2]
+    Observation: 60
+    Thought: I need to tell the user half of the amount of years that have passed since the year the first airplane flew.
+    Answer: 60
+    EXAMPLE
 
     def system_instructions
       <<~PROMPT
