@@ -30,10 +30,15 @@ module RubyBots
   class InvalidOutputError < Error; end
 end
 
+#tools
 require_relative "ruby_bots/tool"
+require_relative "ruby_bots/tools/openai_tool"
+
+#bots
 require_relative "ruby_bots/bot"
-require_relative "ruby_bots/tools/openai_tool.rb"
-require_relative "ruby_bots/bots/openai_bot.rb"
-require_relative "ruby_bots/bots/pipeline_bot.rb"
-require_relative "ruby_bots/bots/router_bot.rb"
-require_relative "ruby_bots/bots/openai_react_bot.rb"
+require_relative "ruby_bots/bots/openai_bot"
+require_relative "ruby_bots/bots/pipeline_bot"
+require_relative "ruby_bots/bots/router_bot"
+require_relative "ruby_bots/bots/openai_react_bot"
+
+require_relative "ruby_bots/version"

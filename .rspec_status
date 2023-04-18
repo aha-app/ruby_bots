@@ -1,0 +1,7 @@
+example_id                           | status | run_time        |
+------------------------------------ | ------ | --------------- |
+./spec/ruby_bots/tool_spec.rb[1:1]   | passed | 0.00031 seconds |
+./spec/ruby_bots/tool_spec.rb[1:2:1] | passed | 0.00067 seconds |
+./spec/ruby_bots/tool_spec.rb[1:2:2] | passed | 0.00005 seconds |
+./spec/ruby_bots/tool_spec.rb[1:2:3] | passed | 0.00006 seconds |
+./spec/ruby_bots_spec.rb[1:1]        | passed | 0.00054 seconds |
