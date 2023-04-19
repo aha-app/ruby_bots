@@ -1,5 +1,5 @@
 RSpec.describe RubyBots do
   it "has a version number" do
-    expect(RubyBots::VERSION).not_to be_nil
+    expect(RubyBots::VERSION).to_not be_nil
   end
 end

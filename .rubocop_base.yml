@@ -1,0 +1,15 @@
+AllCops:
+  TargetRubyVersion: 3.1
+  Exclude:
+    - 'bin/*'
+    - 'Gemfile.lock'
+  NewCops: disable
+
+Metrics/BlockNesting:
+  Max: 5
+
+Style/AsciiComments:
+  Enabled: false
+
+RSpec/AnyInstance:
+  Enabled: false

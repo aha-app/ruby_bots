@@ -1,4 +1,5 @@
 require 'bundler/setup'
+require 'dotenv/load'
 require 'ruby_bots'
 
 # Dir[File.expand_path("spec/support/**/*.rb")].sort.each { |f| require f }

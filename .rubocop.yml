@@ -1,0 +1,11 @@
+inherit_from:
+  - https://raw.githubusercontent.com/aha-app/rubocop-aha/33627ecdc5e86a01d5e618ae24f82fa8185c91a5/lib/config.yml
+  - .rubocop_todo.yml
+  - .rubocop_base.yml
+
+
+RSpec/FilePath:
+  CustomTransform:
+    OpenAI: openai
+    OpenAIBot: openai_bot
+    OpenAITool: openai_tool

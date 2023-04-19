@@ -1,3 +1,4 @@
+# Main module for RubyBots
 module RubyBots
   class << self
     def config
@@ -9,11 +10,13 @@ module RubyBots
     end
   end
 
+  # Configuration class
   class Configuration
     attr_accessor :openai_api_key
-    def initialize()
-      @openai_api_key = ENV["OPENAI_ACCESS_TOKEN"]
-      @wolfram_app_id = ENV["WOLFRAM_APPID"]
+
+    def initialize
+      @openai_api_key = ENV['OPENAI_ACCESS_TOKEN']
+      @wolfram_app_id = ENV['WOLFRAM_APPID']
     end
   end
 
@@ -24,21 +27,27 @@ module RubyBots
   def self.tool
     RubyBots::Tool
   end
-  
+
   class Error < StandardError; end
   class InvalidInputError < Error; end
   class InvalidOutputError < Error; end
 end
 
-#tools
-require_relative "ruby_bots/tool"
-require_relative "ruby_bots/tools/openai_tool"
+class String
+  def strip_heredoc
+    gsub(/^#{scan(/^[ \t]*(?=\S)/).min}/, ''.freeze)
+  end
+end
 
-#bots
-require_relative "ruby_bots/bot"
-require_relative "ruby_bots/bots/openai_bot"
-require_relative "ruby_bots/bots/pipeline_bot"
-require_relative "ruby_bots/bots/router_bot"
-require_relative "ruby_bots/bots/openai_react_bot"
+# tools
+require_relative 'ruby_bots/tool'
+require_relative 'ruby_bots/tools/openai_tool'
 
-require_relative "ruby_bots/version"
+# bots
+require_relative 'ruby_bots/bot'
+require_relative 'ruby_bots/bots/openai_bot'
+require_relative 'ruby_bots/bots/pipeline_bot'
+require_relative 'ruby_bots/bots/router_bot'
+require_relative 'ruby_bots/bots/openai_react_bot'
+
+require_relative 'ruby_bots/version'

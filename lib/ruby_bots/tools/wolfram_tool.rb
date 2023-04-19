@@ -3,14 +3,15 @@ require 'uri'
 require 'net/http'
 
 module RubyBots
+  # This tool provides an interface to get responses from the Wolfram Alpha API.
+  # This tool requires an App ID key from Wolfram Alpha.
+  # add it to your environment variables as WOLFRAM_APP_ID
+  # it is currently alpha and not fully working or tested.
   class WolframTool < Tool
-    # This tool requires an App ID key from Wolfram Alpha.
-    # add it to your environment variables as WOLFRAM_APP_ID
+    DEFAULT_DESCRIPTION = 'This tool will use the Wolfram Alpha API to answer questions.'.freeze
 
-    DEFAULT_DESCRIPTION = "This tool will use the Wolfram Alpha API to answer questions."
-
-    def initialize(name: "Wolfram tool", description: DEFAULT_DESCRIPTION)
-      super(name: name, description: description)
+    def initialize(name: 'Wolfram tool', description: DEFAULT_DESCRIPTION)
+      super(name:, description:)
     end
 
     private

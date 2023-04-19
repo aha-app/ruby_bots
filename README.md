@@ -47,5 +47,5 @@ end
 There are a few validations avialable in the API. They are added the same way as custom validations.
 
 ```
-:is_json - checks if the value is a valid JSON string
+:json? - checks if the value is a valid JSON string
 ```
