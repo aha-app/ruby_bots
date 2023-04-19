@@ -9,6 +9,7 @@ jobs:
       - image: cimg/ruby:3.1-node
     steps:
       - checkout
+      - ruby/install-deps
       - run:
           name: Run Rubocop
           command: bundle exec rubocop
