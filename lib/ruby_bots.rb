@@ -50,4 +50,5 @@ require_relative 'ruby_bots/bots/pipeline_bot'
 require_relative 'ruby_bots/bots/router_bot'
 require_relative 'ruby_bots/bots/openai_react_bot'
 
+require_relative 'ruby_bots/streamable'
 require_relative 'ruby_bots/version'
