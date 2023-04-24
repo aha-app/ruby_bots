@@ -32,8 +32,4 @@ workflows:
   tests:
     jobs:
       - rubocop
-      - test:
-          matrix:
-            parameters:
-              ruby-image:
-                - cimg/ruby:3.1-node
+      - test
