@@ -5,6 +5,7 @@ gem 'wolfram'
 
 gem 'rspec'
 gem 'rubocop'
-gem 'rubocop-aha', github: 'aha-app/rubocop-aha', require: false, ref: 'dc396be4bb76287e23ae42eb8ffd0e59c0242dfc'
+gem 'rubocop-rspec'
+gem 'rubocop-rails'
 gem 'dotenv'
 gem 'simplecov'

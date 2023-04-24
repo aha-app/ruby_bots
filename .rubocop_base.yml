@@ -3,6 +3,7 @@ AllCops:
   Exclude:
     - 'bin/*'
     - 'Gemfile.lock'
+    - 'vendor/**/*.rb'
   NewCops: disable
 
 Metrics/BlockNesting:
