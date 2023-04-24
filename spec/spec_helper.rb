@@ -1,6 +1,9 @@
 require 'bundler/setup'
 require 'dotenv/load'
 require 'ruby_bots'
+require 'simplecov'
+
+SimpleCov.start
 
 # Dir[File.expand_path("spec/support/**/*.rb")].sort.each { |f| require f }
 
@@ -16,6 +19,11 @@ RSpec.configure do |c|
   #     config.access_token = ENV.fetch("OPENAI_ACCESS_TOKEN", "dummy-token")
   #   end
   # end
+
+  c.after(:suite) do
+    SimpleCov.result.format!
+  end
+
 end
 
 # RSPEC_ROOT = File.dirname __FILE__

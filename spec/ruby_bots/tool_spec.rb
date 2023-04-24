@@ -1,11 +1,4 @@
-class RubyBots::TestTool < RubyBots::Tool
-  def run(input)
-    input
-  end
-end
-
 RSpec.describe RubyBots::Tool do
-
   it "can be initialized with a name and description" do
     tool = RubyBots::Tool.new(name: "Tool", description: "This is a tool")
     expect(tool.name).to eq("Tool")
