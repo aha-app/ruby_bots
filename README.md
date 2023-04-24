@@ -374,6 +374,26 @@ There are some validations avialable in the API. They are added the same way as 
 
 By following these steps, you can customize and extend the functionality of RubyBots by creating your own custom bots and tools, adapting them to your specific requirements and ensuring a robust and reliable implementation.
 
+## Streamable Module
+
+The `Streamable` module is a mixin that can be included in any Tool or Bot class to override the default response method. It allows for streaming output from the `run` method instead of validating the output before returning.
+
+### Usage
+
+To use the `Streamable` module, simply include it in your Tool or Bot class:
+
+```ruby
+class MyTool < RubyBots::Tool
+  include RubyBots::Streamable
+
+  # ... your custom methods and validations
+end
+```
+
+### Why use Streamable?
+
+You may want to use the `Streamable` module if your Tool or Bot needs to respond from a system like OpenAI where the response is streamed one token at a time rather than waiting for the entire call to complete. This can improve the user experience when working with OpenAI and other large language models.
+
 # Examples
 
 In this section, we'll provide some sample use cases and example code snippets to demonstrate how you can use the RubyBots gem to create and utilize bots and tools for various tasks.
