@@ -2,5 +2,7 @@
 .DS_Store
 *.gem
 
+coverage
+
 .rubocop-*-yml
 .rspec_status
