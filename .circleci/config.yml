@@ -6,20 +6,17 @@ jobs:
   rubocop:
     parallelism: 1
     docker:
-      - image: cimg/ruby:3.1-node
+      - image: cimg/ruby:3.1
     steps:
       - checkout
       - ruby/install-deps
       - run:
           name: Run Rubocop
           command: bundle exec rubocop
-  test:
-    parameters:
-      ruby-image:
-        type: string
+  rspec:
     parallelism: 1
     docker:
-      - image: cimg/ruby:3.1-node
+      - image: cimg/ruby:3.1
     steps:
       - checkout
       - ruby/install-deps
@@ -32,8 +29,4 @@ workflows:
   tests:
     jobs:
       - rubocop
-      - test:
-          matrix:
-            parameters:
-              ruby-image:
-                - cimg/ruby:3.1-node
+      - rspec
