@@ -3,7 +3,8 @@ AllCops:
   Exclude:
     - 'bin/*'
     - 'Gemfile.lock'
-    - 'vendor/**/*.rb'
+    - 'vendor/**/*'
+    - 'vendor/bundle/**/*'
   NewCops: disable
 
 require: rubocop-rspec
