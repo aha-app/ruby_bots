@@ -1,5 +1,7 @@
 # Ruby Bots
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/aha-app/ruby_bots/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/aha-app/ruby_bots/tree/main)
+
 # Introduction
 
 Welcome to the RubyBots gem documentation! RubyBots is a powerful and versatile gem designed to create, integrate, and manage various bot and tool implementations. The primary purpose of this gem is to simplify the process of building and deploying bots that can leverage different APIs and tools, such as OpenAI, to provide intelligent and context-aware assistance to users.
