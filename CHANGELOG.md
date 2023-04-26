@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.1.2] - 2023-04-26
+### Added
+- RubyBots::Chattable - module that allows for a block to be passed into a tool and the tool to yield for additional input
+- RubyBots::OpenAIChatTool - Utilizes RubyBots::Chattable to open a chat with OpenAI instead of a single response
+- RubyBots::OpenAIChatBot - Utilizes RubyBots::Chattable to open a chat with OpenAI to determine which tool to utilize
+
 ## [0.1.1] - 2023-04-24
 ### Added
 - RubyBots::Streamable - module that directly returns the output from the run function on a Tool and skips the output validations so that the output can be streamed directly to the user.

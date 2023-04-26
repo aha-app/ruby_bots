@@ -39,9 +39,14 @@ class String
   end
 end
 
+require_relative 'ruby_bots/streamable'
+require_relative 'ruby_bots/chattable'
+require_relative 'ruby_bots/version'
+
 # tools
 require_relative 'ruby_bots/tool'
 require_relative 'ruby_bots/tools/openai_tool'
+require_relative 'ruby_bots/tools/openai_chat_tool'
 
 # bots
 require_relative 'ruby_bots/bot'
@@ -50,6 +55,3 @@ require_relative 'ruby_bots/bots/pipeline_bot'
 require_relative 'ruby_bots/bots/router_bot'
 require_relative 'ruby_bots/bots/openai_react_bot'
 require_relative 'ruby_bots/bots/openai_chat_bot'
-
-require_relative 'ruby_bots/streamable'
-require_relative 'ruby_bots/version'
