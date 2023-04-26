@@ -2,7 +2,6 @@ require 'bundler/setup'
 require 'dotenv/load'
 require 'ruby_bots'
 require 'simplecov'
-require 'pry'
 
 SimpleCov.start
 

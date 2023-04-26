@@ -28,7 +28,12 @@ RSpec.describe RubyBots::OpenAIChatTool do
 
       response_test = nil
 
-      expect(tool.response('This is a test prompt') { |response| response_test = response; 'exit' }).to be_nil
+      expect(
+        tool.response('This is a test prompt') do |tool_output|
+          response_test = tool_output
+          'exit'
+        end
+      ).to eq('some answer')
 
       expect(response_test).to eq('some answer')
     end
