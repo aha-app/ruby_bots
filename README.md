@@ -405,7 +405,7 @@ The `Chattable` mixin is a module that can be included in any Tool or Bot class 
 To use the `Chattable` mixin, simply include it in your Tool or Bot class:
 
 ```ruby
-class MyChattableBot < RubyBots::Bot
+class MyChattableTool < RubyBots::Tool
   include RubyBots::Chattable
 
   # ... your custom methods and validations
@@ -419,30 +419,43 @@ Here's an example of a custom bot using the `Chattable` mixin:
 ```ruby
 require 'ruby_bots'
 
-class MyChattableBot < RubyBots::Bot
+class MyChattableTool < RubyBots::Tool
   include RubyBots::Chattable
 
   def initialize
-    super(name: 'My chattable bot', description: 'This bot can engage in conversations.')
+    super(name: 'My chattable tool', description: 'This tool can engage in conversations.')
   end
 
   private
 
   def run(input, &block)
     # Process the input and pass it to the block
-    block.call("Bot: #{input}")
+    # keep processing new input until 'exit' is passed as input
+    output = ''
+
+    unless input == 'exit'
+      output = process_input(input)
+      input = yield output
+    end
+
+    output
+  end
+
+  def process_input(input)
+    "Bot received: #{input}"
   end
 end
 
-# Create a MyChattableBot
-chattable_bot = MyChattableBot.new
+# Create a MyChattableTool
+chattable_tool = MyChattableTool.new
 
 # User's input
 user_input = "What's up?"
 
 # Get the response from the MyChattableBot and process it using a block
-chattable_bot.response(user_input) do |response|
-  puts response # Output: "Bot: What's up?"
+chattable_tool.response(user_input) do |response|
+  puts response # Output: "Bot received: What's up?"
+  gets          # return more input from the command line and repeat, 'exit' to end.
 end
 ```
 
