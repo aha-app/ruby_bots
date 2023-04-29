@@ -7,3 +7,5 @@ RSpec/FilePath:
     OpenAI: openai
     OpenAIBot: openai_bot
     OpenAITool: openai_tool
+    OpenAIChatBot: openai_chat_bot
+    OpenAIChatTool: openai_chat_tool

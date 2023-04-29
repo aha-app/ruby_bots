@@ -376,9 +376,9 @@ There are some validations avialable in the API. They are added the same way as 
 
 By following these steps, you can customize and extend the functionality of RubyBots by creating your own custom bots and tools, adapting them to your specific requirements and ensuring a robust and reliable implementation.
 
-## Streamable Module
+## Streamable Mixin
 
-The `Streamable` module is a mixin that can be included in any Tool or Bot class to override the default response method. It allows for streaming output from the `run` method instead of validating the output before returning.
+The `Streamable` mixin is a module that can be included in any Tool or Bot class to override the default response method. It allows for streaming output from the `run` method instead of validating the output before returning.
 
 ### Usage
 
@@ -395,6 +395,75 @@ end
 ### Why use Streamable?
 
 You may want to use the `Streamable` module if your Tool or Bot needs to respond from a system like OpenAI where the response is streamed one token at a time rather than waiting for the entire call to complete. This can improve the user experience when working with OpenAI and other large language models.
+
+# Chattable Mixin
+
+The `Chattable` mixin is a module that can be included in any Tool or Bot class to override the default response method. It's designed for use cases where a Tool or Bot needs to interact with the user in a more conversational manner, allowing for a block to be passed in which can be used to handle the processing of the responses.
+
+## Usage
+
+To use the `Chattable` mixin, simply include it in your Tool or Bot class:
+
+```ruby
+class MyChattableTool < RubyBots::Tool
+  include RubyBots::Chattable
+
+  # ... your custom methods and validations
+end
+```
+
+After including the `Chattable` mixin, you should implement the `run` method in your Tool or Bot class. The `run` method should accept an input and a block, and return the appropriate output after processing it.
+
+Here's an example of a custom bot using the `Chattable` mixin:
+
+```ruby
+require 'ruby_bots'
+
+class MyChattableTool < RubyBots::Tool
+  include RubyBots::Chattable
+
+  def initialize
+    super(name: 'My chattable tool', description: 'This tool can engage in conversations.')
+  end
+
+  private
+
+  def run(input, &block)
+    # Process the input and pass it to the block
+    # keep processing new input until 'exit' is passed as input
+    output = ''
+
+    unless input == 'exit'
+      output = process_input(input)
+      input = yield output
+    end
+
+    output
+  end
+
+  def process_input(input)
+    "Bot received: #{input}"
+  end
+end
+
+# Create a MyChattableTool
+chattable_tool = MyChattableTool.new
+
+# User's input
+user_input = "What's up?"
+
+# Get the response from the MyChattableBot and process it using a block
+chattable_tool.response(user_input) do |response|
+  puts response # Output: "Bot received: What's up?"
+  gets          # return more input from the command line and repeat, 'exit' to end.
+end
+```
+
+## Why use Chattable?
+
+The `Chattable` mixin provides a way to handle more complex and interactive communication between the user and the bot. By allowing a block to be passed in, it enables the bots to ask the users for more information and interact in more natural and dynamic ways.
+
+The `OpenAIChatTool` and `OpenAIChatBot` both utilize the Chattable mixin.
 
 # Examples
 
@@ -491,6 +560,29 @@ user_input = "How many words are in this sentence?"
 response = pipeline_bot.response(user_input)
 
 puts response # Output: "7"
+```
+
+## Example 4: Using the OpenAIChatTool
+
+In this example, we'll use the built-in `RubyBots::OpenAIChatTool` to answer a user's question by interacting with the OpenAI API and asking the user follow-up questions.
+
+```ruby
+require 'ruby_bots'
+
+# Create an OpenAIChatTool
+openai_react_bot = RubyBots::OpenAIChatTool.new
+
+# User's input
+user_input = "What is the lowest recorded temperature here?"
+
+# Get the response from the OpenAIChatTool, displays it to the user and waits for more input
+# This loop will continue until the the user types one of the exit string [ 'exit', 'quit', 'q', 'stop', 'bye' ]
+# Given the user_input above, the bot may respond with "To provide you with the lowest recorded temperature, I need to know the specific location you are referring to. Please provide the name of the city, region, or country."
+# The user can then provide a clarifying answer and chat back and forth until they are ready to exit
+response = openai_react_bot.response(user_input) do |bot_output|
+  puts bot_output
+  gets
+end
 ```
 
 These examples demonstrate just a few of the possibilities when using the RubyBots gem. You can create custom bots and tools to handle a wide range of tasks or use the built-in bots and tools to quickly get started with tasks like question-answering, routing, and more.

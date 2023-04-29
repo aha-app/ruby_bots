@@ -1,4 +1,4 @@
-class TestTool < RubyBots::Tool
+class TestStreamableTool < RubyBots::Tool
   include RubyBots::Streamable
 
   validate_output :json?
@@ -9,7 +9,7 @@ class TestTool < RubyBots::Tool
 end
 
 RSpec.describe RubyBots::Streamable do
-  let(:test_tool) { TestTool.new(name: 'Test Tool', description: 'A test tool for Streamable module') }
+  let(:test_tool) { TestStreamableTool.new(name: 'Test Tool', description: 'A test tool for Streamable module') }
 
   describe '#response' do
     it 'returns the output from the run method directly, skipping output validations' do
