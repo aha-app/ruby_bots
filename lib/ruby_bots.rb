@@ -47,6 +47,7 @@ require_relative 'ruby_bots/version'
 require_relative 'ruby_bots/tool'
 require_relative 'ruby_bots/tools/openai_tool'
 require_relative 'ruby_bots/tools/openai_chat_tool'
+require_relative 'ruby_bots/tools/openai_streaming_tool'
 
 # bots
 require_relative 'ruby_bots/bot'
