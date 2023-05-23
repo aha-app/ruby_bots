@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.1.4-0.1.4] - 2023-05-23
+### Changed
+- Dependency cleanup
+
 ## [0.1.3] - 2023-05-23
 ### Added
 - RubyBots::OpenAIStreamingTool - a tool that can stream a response from OpenAI
