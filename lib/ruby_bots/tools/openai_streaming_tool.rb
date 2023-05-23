@@ -12,14 +12,15 @@ module RubyBots
           model: 'gpt-4',
           temperature: 0.7,
           stream: stream_proc
-       }).each do |response|
+        }
+      ).each do |response|
         puts response
       end
     end
 
     def stream_proc
       proc do |chunk, _bytesize|
-        print chunk.dig("choices", 0, "delta", "content")
+        print chunk.dig('choices', 0, 'delta', 'content')
       end
     end
   end
