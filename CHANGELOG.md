@@ -1,6 +1,10 @@
 # Changelog
 
-## [0.1.4-0.1.4] - 2023-05-23
+## [0.1.6] - 2023-06-01
+### Changed
+- Fixed bug introduced in 0.1.3 for OpenAIStreamingTool
+
+## [0.1.4-0.1.5] - 2023-05-23
 ### Changed
 - Dependency cleanup
 
