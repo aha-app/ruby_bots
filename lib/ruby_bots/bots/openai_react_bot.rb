@@ -121,8 +121,6 @@ module RubyBots
       tool_name = tool_string.match(/([a-zA-Z_\- ]*)\[([\s\S]*)\]/)[1]
       tool_input = tool_string.match(/([a-zA-Z_\- ]*)\[([\s\S]*)\]/)[2]
 
-      notify_observers(:action, tool_name, tool_input)
-
       tool = tools.find { |t| t.name == tool_name }
 
       tool.response(tool_input)
