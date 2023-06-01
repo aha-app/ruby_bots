@@ -35,6 +35,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rspec', '~> 3.2'
 
   # runtime dependencies
-  spec.add_dependency 'google_search_results', '~> 2.2'
-  spec.add_dependency 'ruby-openai', '~> 3.0'
+  spec.add_dependency 'ruby-openai', '~> 4.0'
 end

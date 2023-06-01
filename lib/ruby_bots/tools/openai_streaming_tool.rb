@@ -13,9 +13,7 @@ module RubyBots
           temperature: 0.7,
           stream: stream_proc
         }
-      ).each do |response|
-        puts response
-      end
+      )
     end
 
     def stream_proc
