@@ -16,7 +16,7 @@ module RubyBots
 
     def default_params
       {
-        model: 'gpt-4',
+        model: 'gpt-3.5-turbo',
         temperature: 0
       }
     end
