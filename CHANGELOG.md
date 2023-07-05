@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0] - 2023-06-25
+### Changed
+- Updated OpenAIStreamingTool
+  - messages is now an initialization parameter. These messages are then added to the prompt.
+  - response can now take no arguments and will return the response based on the @messages present.
+- Changed the default OpenAI model to be gpt-3.5-turbo rather than gpt-4 due to restrictions with gpt-4.
+
 ## [0.1.6] - 2023-06-01
 ### Changed
 - Fixed bug introduced in 0.1.3 for OpenAIStreamingTool

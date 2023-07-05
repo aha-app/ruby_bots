@@ -1,18 +1,31 @@
 module RubyBots
   class OpenAIStreamingTool < OpenAIChatTool
-    def run(input, &block)
-      @messages = [
-        { role: :system, content: system_instructions },
-        { role: :user, content: input }
-      ]
+    def initialize(name: 'OpenAI Streaming Tool', description: DEFAULT_DESCRIPTION, messages: nil)
+      @messages = messages || []
+      super(name:, description:)
+    end
+
+    def response
+      super('')
+    end
+
+    private
+
+    def run(input)
+      messages = [
+        { role: :system, content: system_instructions }
+      ] + @messages
+      unless input.empty?
+        messages += [
+          { role: :user, content: input }
+        ]
+      end
 
       client.chat(
         parameters: {
-          messages: @messages,
-          model: 'gpt-4',
-          temperature: 0.7,
+          messages:,
           stream: stream_proc
-        }
+        }.merge(default_params)
       )
     end
 

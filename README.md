@@ -160,7 +160,7 @@ Tools are the building blocks of the RubyBots gem, providing specific functional
 
 ## OpenAITool
 
-The `OpenAITool` connects to the OpenAI API and uses the provided model (default is `gpt-4`) to generate a response based on the user's input.
+The `OpenAITool` connects to the OpenAI API and uses the provided model (default is `gpt-3.5-turbo`) to generate a response based on the user's input.
 
 ### Usage
 
@@ -171,6 +171,66 @@ openai_tool = RubyBots::OpenAITool.new
 ```
 
 You can then use this tool with any bot that accepts tools, such as the `PipelineBot` or `RouterBot`.
+
+## OpenAIStreamingTool
+
+The `OpenAIStreamingTool` connects to the OpenAI API and uses the provided model to generate a response based on the user's input. This tool also provides a way to inject messages into the prompt and stream the output using a proc.
+
+### Usage
+
+The best way to use the `OpeanAIStreamingTool` is to subclass it and provide a proc for handling the response chunks. Here is an example of a bot that could be used inside of a rails app using server side events (`SSE.new`) and `ActionController::Live`
+
+```ruby
+class ChatBot < RubyBots::OpenAIStreamingBot
+  def initialize(sse:, messages: [])
+    @sse = sse
+    super(name: 'ChatBot', description: 'A streaming assistant', messages:)
+  end
+
+  def stream_proc
+    proc do |chunk, _bytesize|
+      message = chunk.dig('choices', 0, 'delta', 'content')
+      @sse.write({ data: message }, event: 'text')
+    end
+  end
+end
+```
+```ruby
+class ChatController < ApplicationController
+  include ActionController::Live
+
+  def chat
+    @messages = JSON.parse(params['messages'])
+
+    response.headers['Content-Type'] = 'text/event-stream'
+    @sse = SSE.new(response.stream)
+
+    chat_bot = ChatBot.new(sse: @sse, messages: @messages)
+
+    begin
+      chat_bot.response
+    ensure
+      @sse.write({}, event: 'done')
+      @sse.close
+    end
+  end
+end
+```
+
+This code assumes you have set up a rails controller called `ChatController` and have created a `chat` endpoint that will take a `messages` parameter. The messages should be an array of messages formatted for OpenAI like so:
+
+    {role:, content:}
+
+Here `role` is either `"user"` or `"assistant"` and `content` is a string providing the message from that role.
+
+The endpoint will need to be a `GET` endpoint and the parameters will need to be passed as query parameters using an `EventStream` on the frontend. The frontend will also need to handle the `text` and `done` events that are created in the controller and bot.
+
+Note: If you have problems with the StreamEvent messages batching up in your rails response, try disabling the ETag middleware:
+
+    config.middleware.delete Rack::ETag
+
+An example app with the above setup can be found here: (RubyBots Example Chat Rails Application)[https://github.com/aha-app/chat_app].
+
 
 ## Custom Tools
 
@@ -252,7 +312,7 @@ pipeline_bot = RubyBots::PipelineBot.new(tools: tools)
 
 ## RouterBot
 
-The `RouterBot` is a pre-built bot that connects to the OpenAI API and uses the provided model (default is `gpt-4`) to choose the proper tool to route the user's input. The bot will only select and use one tool.
+The `RouterBot` is a pre-built bot that connects to the OpenAI API and uses the provided model to choose the proper tool to route the user's input. The bot will only select and use one tool.
 
 ### Usage
 

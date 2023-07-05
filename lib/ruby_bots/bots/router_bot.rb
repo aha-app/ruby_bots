@@ -1,6 +1,6 @@
 module RubyBots
   # Class to provide a router to different tools.
-  # This bot connects to the OpenAI API and uses gpt-4 by default to choose a proper tool to route the user's input.
+  # This bot connects to the OpenAI API and uses gpt-3.5-turbo by default to choose a proper tool to route the user's input.
   # The bot will only select and use one tool by default.
   class RouterBot < OpenAIBot
     DEFAULT_DESCRIPTION = <<~DESCRIPTION.strip_heredoc
