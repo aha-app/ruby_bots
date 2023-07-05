@@ -229,7 +229,7 @@ Note: If you have problems with the StreamEvent messages batching up in your rai
 
     config.middleware.delete Rack::ETag
 
-An example app with the above setup can be found here: (RubyBots Example Chat Rails Application)[https://github.com/aha-app/chat_app].
+An example app with the above setup can be found here: [RubyBots Example Chat Rails Application](https://github.com/aha-app/chat_app).
 
 
 ## Custom Tools
